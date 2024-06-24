@@ -1,7 +1,8 @@
+import sys
 import os
 import re
 
-from PyQt5.QtGui import QStandardItemModel, QStandardItem      
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon      
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 
@@ -219,6 +220,8 @@ class NewFolderDialog(QDialog):
 
 def main():
     app = QApplication([])
+    #set application icon
+    app.setWindowIcon(QIcon('Bulkfilerename/renamegenie.jpg'))
     window = MyGui()
     window.show()
     app.exec_()
