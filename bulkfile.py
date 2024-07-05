@@ -6,7 +6,7 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem, QIcon
 from PyQt5.QtWidgets import *
 from PyQt5 import uic
 
-
+#Initialization
 class MyGui(QMainWindow):
 
     def __init__(self):
@@ -33,9 +33,11 @@ class MyGui(QMainWindow):
         self.removeButton.clicked.connect(self.remove_selection)
         self.applyButton.clicked.connect(self.rename_files)
         self.actionCrete_New_Folder.triggered.connect(self.create_folder)
+        self.deselectButton.clicked.connect(self.deselect_directory)
         self.changeExtensionButton.clicked.connect(self.change_extension)
 
-    # function to load directory
+    
+# function to load directory
 
     def load_directory(self):
         # open of a file Dialog
@@ -45,7 +47,7 @@ class MyGui(QMainWindow):
             if os.path.isfile(os.path.join(self.directory, file)):
                 self.listModel.appendRow(QStandardItem(file))
         self.listView.setModel(self.listModel)
-
+# Renaming Files
     def rename_files(self):
         counter = 1
         # because we only need to look into the selected list
@@ -76,6 +78,7 @@ class MyGui(QMainWindow):
                     os.rename(os.path.join(self.directory, filename), os.path.join(
                         self.directory, self.nameEdit.text() + str(counter) + "." + filetype))
                     counter += 1
+                #elif self
                 else:
                     print("Select a radio button!")
         except Exception as e:
@@ -172,6 +175,15 @@ class MyGui(QMainWindow):
 
         except Exception as e:
             QMessageBox.critical(self, "Error", str(e))
+    
+    
+    def deselect_directory(self):
+        self.directory = "."
+        self.listModel.clear()
+        self.listView.setModel(self.listModel)
+        self.selected = []
+        self.selectModel.clear()
+        #self.selectView.setModel(self)
 
 
 
